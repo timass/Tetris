@@ -93,7 +93,7 @@ namespace Tetris
                             {
                                 Thread.Sleep(100);
                                 ConsoleKeyInfo k = Console.ReadKey();
-                                if (k.KeyChar == 'p')
+                                if (k.KeyChar == 'з'|| k.KeyChar == 'p')
                                 {
                                     newgrid.direction = d.SlowDown;
                                     break;
