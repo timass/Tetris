@@ -37,6 +37,7 @@ namespace Tetris
             {
                 if (newgrid.direction == d.Stop)
                 { break; }
+                Thread.Sleep(10);
                 while (newgrid.Counting(out GridUnit LineFirstGrid))
                 {
                     count++;
@@ -72,7 +73,7 @@ namespace Tetris
                     Console.Write($"Count: {count}");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.SetCursorPosition(Grid.Width + 5, Grid.Length / 2 + 1);
-                    Console.Write($"MaxScore:{start.Score} Date:{start.date} ");
+                    Console.Write($"MaxScore:{start.Score}    Date:{start.date.ToShortDateString()} ");
                     newgrid.CheckGrid(figure); // Set true  for the GridPosition 
                     newgrid.DrawGrid();
                     Thread.Sleep(100);
@@ -83,16 +84,15 @@ namespace Tetris
                         newgrid.direction = d.SlowDown;
                         if (Console.KeyAvailable)
                         {
-                            ConsoleKeyInfo key = Console.ReadKey();
+                            ConsoleKeyInfo key = Console.ReadKey(true);
                             newgrid.Handlekey(key.Key);
                         }
-
                         if (newgrid.direction == d.Pause) //Pause
                         {
                             while (true)
                             {
                                 Thread.Sleep(100);
-                                ConsoleKeyInfo k = Console.ReadKey();
+                                ConsoleKeyInfo k = Console.ReadKey(true);
                                 if (k.KeyChar == 'з'|| k.KeyChar == 'p')
                                 {
                                     newgrid.direction = d.SlowDown;
@@ -129,7 +129,6 @@ namespace Tetris
                             }
                             else break;
                         }
-
                         else if (newgrid.direction == d.Rotation)
                         {
                             newgrid.CheckGridNotDraw(figure);
@@ -143,6 +142,10 @@ namespace Tetris
                         }
                         newgrid.CheckGrid(figure);
                         newgrid.DrawGrid();
+                        if (Console.KeyAvailable)
+                        {
+                            newgrid.direction = d.SlowDown;
+                        }
                     }
                     break;
                  }

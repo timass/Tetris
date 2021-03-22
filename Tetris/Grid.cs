@@ -13,10 +13,19 @@ namespace Tetris
         public d direction;
         public Grid(int length, int width)
         {
-            if (width < 20) throw new Exception("Width is too small");
-            else Width = width;
-            if (length >= 30) throw new Exception("Lengt is biggest than buffer size");
-            else Length = length;
+            try
+            {
+                if (width < 20) { throw new Exception("Width is too small"); }
+                if (length >= 30) throw new Exception("Lengt is biggest than buffer size");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.ReadKey();
+                System.Environment.Exit(0);
+            }
+            Width = width;
+            Length = length;
         }
        public void PosiblePlaceGrid() //Create cells
        { 

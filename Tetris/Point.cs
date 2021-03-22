@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Tetris
 {
-    class Point:ICloneable
+    class Point:IEnumerable, ICloneable
     {
         public int x;
         public int y;
